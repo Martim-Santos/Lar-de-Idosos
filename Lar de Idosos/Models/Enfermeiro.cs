@@ -1,5 +1,5 @@
 ﻿namespace Lar_de_Idosos.Models {
-    public class Enfermeiro {
+    public class Trabalhador {
 
         public int Id { get; set; }
 
@@ -12,5 +12,9 @@
         public string NumTelemovel { get; set; }
 
         public string Descricao { get; set; }
+
+        public bool Medico { get; set; }
+
+        public string Tipo { get; set; }
     }
 }
