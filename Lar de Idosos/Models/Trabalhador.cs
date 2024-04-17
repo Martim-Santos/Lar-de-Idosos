@@ -1,6 +1,10 @@
 ﻿namespace Lar_de_Idosos.Models {
     public class Trabalhador {
 
+        public Trabalhador() {
+            ListaConsultas = new HashSet<Consulta>();
+        }
+
         public int Id { get; set; }
 
         public string Nome { get; set; }
@@ -16,5 +20,9 @@
         public bool Medico { get; set; }
 
         public string Tipo { get; set; }
+
+
+        // lista das Consultas 'Pertencentes' a um Idoso
+        public ICollection<Consulta> ListaConsultas { get; set; }
     }
 }
