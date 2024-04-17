@@ -3,6 +3,7 @@
 
         public Trabalhador() {
             ListaConsultas = new HashSet<Consulta>();
+            ListaIdosos = new HashSet<Idoso>();
         }
 
         public int Id { get; set; }
@@ -21,8 +22,16 @@
 
         public string Tipo { get; set; }
 
-
+      
+        /* ****************************************
+        * Construção dos Relacionamentos
+        * *************************************** */
+      
         // lista das Consultas 'Pertencentes' a um Idoso
         public ICollection<Consulta> ListaConsultas { get; set; }
+
+        
+        // relacionamento N-M, com atributos no relacionamento
+        public ICollection<Idoso> ListaIdosos { get; set; }
     }
 }
