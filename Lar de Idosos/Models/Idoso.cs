@@ -4,6 +4,7 @@ namespace Lar_de_Idosos.Models {
     public class Idoso {
 
         public Idoso() {
+            ListaConsultas = new HashSet<Consulta>();
             ListaTrabalhadores = new HashSet<Trabalhador>();
         }
 
@@ -25,7 +26,12 @@ namespace Lar_de_Idosos.Models {
         public Guardiao Guardiao { get; set; } // FK para o Guardiao
 
 
+
+        // lista das Consultas 'Pertencentes' a um Idoso
+        public ICollection<Consulta> ListaConsultas { get; set; }
+
         // relacionamento N-M, com atributos no relacionamento
         public ICollection<Trabalhador> ListaTrabalhadores { get; set; }
+
     }
 }
