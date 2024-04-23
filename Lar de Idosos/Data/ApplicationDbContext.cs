@@ -4,13 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Lar_de_Idosos.Data {
 
-    
-   public class ApplicationDbContext : IdentityDbContext {
 
-      public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-          : base(options) {
-      }
+    public class ApplicationDbContext : IdentityDbContext {
 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options) {
+        }
+
+        
 
         /* ********************************************
          * defenir as 'tabelas' da base de dados
@@ -23,4 +24,6 @@ namespace Lar_de_Idosos.Data {
         public DbSet<Trabalhador> Trabalhador { get; set; }
 
         public DbSet<Consulta> Consulta { get; set; }
+
+    }
 }
