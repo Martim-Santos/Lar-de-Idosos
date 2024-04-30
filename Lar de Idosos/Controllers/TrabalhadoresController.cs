@@ -11,26 +11,26 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Lar_de_Idosos.Controllers
 {
-    public class TrabalhadorsController : Controller
+    public class TrabalhadoresController : Controller
     {
         private readonly ApplicationDbContext _context;
 
         private readonly IWebHostEnvironment _webHostEnvironment;
 
 
-        public TrabalhadorsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        public TrabalhadoresController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: Trabalhadors
+        // GET: Trabalhadores
         public async Task<IActionResult> Index()
         {
             return View(await _context.Trabalhador.ToListAsync());
         }
 
-        // GET: Trabalhadors/Details/5
+        // GET: Trabalhadores/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,13 +48,13 @@ namespace Lar_de_Idosos.Controllers
             return View(trabalhador);
         }
 
-        // GET: Trabalhadors/Create
+        // GET: Trabalhadores/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Trabalhadors/Create
+        // POST: Trabalhadores/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -68,7 +68,7 @@ namespace Lar_de_Idosos.Controllers
 
                 if (ImagemFoto == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Deve fornecer um logótipo");
+                    ModelState.AddModelError(string.Empty, "Deve fornecer uma Foto");
                     return View(trabalhador);
                 }
                 else
@@ -95,7 +95,7 @@ namespace Lar_de_Idosos.Controllers
                 // Commit
                 await _context.SaveChangesAsync();
 
-                // guardar a imagem do logotipo
+                // guardar a imagem da foto
                 if (haImagem)
                 {
                     //encolher a imagem ao tamanho certo.
@@ -116,13 +116,13 @@ namespace Lar_de_Idosos.Controllers
 
                 }
 
-                // redireciona o utilizador para a página de 'início' dos cursos.
+                // redireciona o utilizador para a página de 'início' dos trabalhadores.
                 return RedirectToAction(nameof(Index));
             };
             return View(trabalhador);
         }
 
-        // GET: Trabalhadors/Edit/5
+        // GET: Trabalhadores/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -138,7 +138,7 @@ namespace Lar_de_Idosos.Controllers
             return View(trabalhador);
         }
 
-        // POST: Trabalhadors/Edit/5
+        // POST: Trabalhadores/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -173,7 +173,7 @@ namespace Lar_de_Idosos.Controllers
             return View(trabalhador);
         }
 
-        // GET: Trabalhadors/Delete/5
+        // GET: Trabalhadores/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -191,7 +191,7 @@ namespace Lar_de_Idosos.Controllers
             return View(trabalhador);
         }
 
-        // POST: Trabalhadors/Delete/5
+        // POST: Trabalhadores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
