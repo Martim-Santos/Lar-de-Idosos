@@ -14,7 +14,7 @@ namespace Lar_de_Idosos.Models {
 
         public int Idade { get; set; }
 
-
+        public string? Foto { get; set; }
 
 
         /* ****************************************
