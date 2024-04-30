@@ -16,6 +16,8 @@ namespace Lar_de_Idosos.Models {
 
         public string? Foto { get; set; }
 
+        public EstadoIdoso estado { get; set; }
+
 
         /* ****************************************
         * Construção dos Relacionamentos
@@ -33,5 +35,11 @@ namespace Lar_de_Idosos.Models {
         // relacionamento N-M, com atributos no relacionamento
         public ICollection<Trabalhador> ListaTrabalhadores { get; set; }
 
+    }
+
+    public enum EstadoIdoso {
+        Pendente,
+        Aceite,
+        Rejeitado
     }
 }
