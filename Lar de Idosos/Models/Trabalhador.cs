@@ -22,11 +22,12 @@
 
         public string Tipo { get; set; }
 
-      
+        public string? Foto { get; set; }
+
         /* ****************************************
         * Construção dos Relacionamentos
         * *************************************** */
-      
+
         // lista das Consultas 'Pertencentes' a um Idoso
         public ICollection<Consulta> ListaConsultas { get; set; }
 
