@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Lar_de_Idosos.Models {
@@ -26,7 +27,9 @@ namespace Lar_de_Idosos.Models {
         /// </summary>
         public string NumTelemovel { get; set; }
 
-
+        [ForeignKey(nameof(IdentityUser))]
+        public string? IdentityUserFK { get; set; } // FK para o Guardiao
+        public IdentityUser? IdentityUser { get; set; }
 
 
         /* ****************************************

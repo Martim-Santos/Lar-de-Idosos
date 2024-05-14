@@ -4,6 +4,7 @@ using Lar_de_Idosos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lar_de_Idosos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240514083401_guardiao-password")]
+    partial class guardiaopassword
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,9 +79,6 @@ namespace Lar_de_Idosos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentityUserFK")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -87,9 +87,11 @@ namespace Lar_de_Idosos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("IdentityUserFK");
+                    b.HasKey("Id");
 
                     b.ToTable("Guardiao");
                 });
@@ -398,15 +400,6 @@ namespace Lar_de_Idosos.Migrations
                     b.Navigation("Idoso");
 
                     b.Navigation("Trabalhador");
-                });
-
-            modelBuilder.Entity("Lar_de_Idosos.Models.Guardiao", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserFK");
-
-                    b.Navigation("IdentityUser");
                 });
 
             modelBuilder.Entity("Lar_de_Idosos.Models.Idoso", b =>
