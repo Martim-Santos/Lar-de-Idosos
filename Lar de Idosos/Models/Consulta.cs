@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Lar_de_Idosos.Models {
     public class Consulta {
 
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "A {0} é de preenchimento obrigatório.")]
         public string Descricao { get; set; }
 
 
