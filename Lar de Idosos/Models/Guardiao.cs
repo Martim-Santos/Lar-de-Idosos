@@ -14,16 +14,23 @@ namespace Lar_de_Idosos.Models {
         /// <summary>
         /// Nome do Guardião
         /// </summary>
+        [Required(ErrorMessage = "A {0} é de preenchimento obrigatório.")]
         public string Nome { get; set; }
 
         /// <summary>
         /// email do Guardião
         /// </summary>
+        [Required(ErrorMessage = "A {0} é de preenchimento obrigatório.")]
+        [RegularExpression("[a-z,A-Z,@]")]
         public string Email { get; set; }
 
         /// <summary>
         /// nº de telemovel do Guardião
         /// </summary>
+        [Display(Name = "Número de Telefone")]
+        [Required(ErrorMessage = "A {0} é de preenchimento obrigatório.")]
+        [StringLength(9)]
+        [RegularExpression("[0-9]{9}")]
         public string NumTelemovel { get; set; }
 
 

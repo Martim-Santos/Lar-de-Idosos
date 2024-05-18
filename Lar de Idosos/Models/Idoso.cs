@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Lar_de_Idosos.Models {
     public class Idoso {
@@ -10,8 +11,10 @@ namespace Lar_de_Idosos.Models {
 
         public int Id { get; set; }
 
+        [Required(ErrorMessage = "A {0} é de preenchimento obrigatório.")]
         public string Nome { get; set; }
 
+        [Required(ErrorMessage = "A {0} é de preenchimento obrigatório.")]
         public int Idade { get; set; }
 
         public string? Foto { get; set; }
