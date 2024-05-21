@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using NuGet.Protocol.Plugins;
 using System.Linq;
@@ -39,21 +40,30 @@ namespace Lar_de_Idosos.Controllers.API {
         [HttpGet]
         [Route("")]
         public ActionResult Index() {
-            var listaG = _context.Guardiao.ToList();
-
+            var listaG = _context.Trabalhador.ToList();
 
             return Ok(listaG);
         }
 
         [HttpGet]
-        [Route("ola")]
-        [Authorize]
-        public ActionResult OlaNome(string nome) {
-            if (nome.IsNullOrEmpty()) {
-                return BadRequest();
-            }
+        [Route("ListaIdoso")]
+        public ActionResult ListaIdoso() {
+            var lista = _context.Idoso.ToList();
+            return Ok(lista);
+        }
 
-            return Ok("Olá " + nome);
+        [HttpGet]
+        [Route("ListaGuardiao")]
+        public ActionResult ListaGuardiao() {
+            var lista = _context.Guardiao.ToList();
+            return Ok(lista);
+        }
+
+        [HttpGet]
+        [Route("ListaTrabalhador")]
+        public ActionResult ListaTrabalhador() {
+            var lista = _context.Trabalhador.ToList();
+            return Ok(lista);
         }
 
         /// <summary>
@@ -181,6 +191,14 @@ namespace Lar_de_Idosos.Controllers.API {
 
 
             // TODO: CRIAR O GUARDIAO COM FK DO IDENTITYUSER -> GUARDIAO.IDENTITYUSERFK = USER.ID
+            Guardiao guardiao = new Guardiao();
+            guardiao.IdentityUserFK = user.Id;
+            guardiao.Email = user.Email;
+            guardiao.Nome = guardiaoDTO.Nome;
+            guardiao.NumTelemovel = guardiaoDTO.NumTelemovel;
+
+            _context.Guardiao.Add(guardiao);
+            _context.SaveChanges();
 
 
             return Ok();
