@@ -1,4 +1,7 @@
-﻿namespace Lar_de_Idosos.Models {
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Lar_de_Idosos.Models {
     public class Trabalhador {
 
         public Trabalhador() {
@@ -23,6 +26,11 @@
         public string Tipo { get; set; }
 
         public string? Foto { get; set; }
+
+
+        [ForeignKey(nameof(IdentityUser))]
+        public string? IdentityUserFK { get; set; } // FK para o Trabalhador
+        public IdentityUser? IdentityUser { get; set; }
 
         /* ****************************************
         * Construção dos Relacionamentos

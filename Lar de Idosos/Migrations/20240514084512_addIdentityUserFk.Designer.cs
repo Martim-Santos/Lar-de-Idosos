@@ -4,6 +4,7 @@ using Lar_de_Idosos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Lar_de_Idosos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240514084512_addIdentityUserFk")]
+    partial class addIdentityUserFk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace Lar_de_Idosos.Migrations
 
                     b.HasIndex("ListaTrabalhadoresId");
 
-                    b.ToTable("IdosoTrabalhador", (string)null);
+                    b.ToTable("IdosoTrabalhador");
                 });
 
             modelBuilder.Entity("Lar_de_Idosos.Models.Consulta", b =>
@@ -61,7 +64,7 @@ namespace Lar_de_Idosos.Migrations
 
                     b.HasIndex("TrabalhadorFK");
 
-                    b.ToTable("Consulta", (string)null);
+                    b.ToTable("Consulta");
                 });
 
             modelBuilder.Entity("Lar_de_Idosos.Models.Guardiao", b =>
@@ -91,7 +94,7 @@ namespace Lar_de_Idosos.Migrations
 
                     b.HasIndex("IdentityUserFK");
 
-                    b.ToTable("Guardiao", (string)null);
+                    b.ToTable("Guardiao");
                 });
 
             modelBuilder.Entity("Lar_de_Idosos.Models.Idoso", b =>
@@ -122,7 +125,7 @@ namespace Lar_de_Idosos.Migrations
 
                     b.HasIndex("GuardiaoFK");
 
-                    b.ToTable("Idoso", (string)null);
+                    b.ToTable("Idoso");
                 });
 
             modelBuilder.Entity("Lar_de_Idosos.Models.Trabalhador", b =>
@@ -148,9 +151,6 @@ namespace Lar_de_Idosos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdentityUserFK")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("Medico")
                         .HasColumnType("bit");
 
@@ -168,9 +168,7 @@ namespace Lar_de_Idosos.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdentityUserFK");
-
-                    b.ToTable("Trabalhador", (string)null);
+                    b.ToTable("Trabalhador");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -318,12 +316,10 @@ namespace Lar_de_Idosos.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -360,12 +356,10 @@ namespace Lar_de_Idosos.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -427,15 +421,6 @@ namespace Lar_de_Idosos.Migrations
                         .IsRequired();
 
                     b.Navigation("Guardiao");
-                });
-
-            modelBuilder.Entity("Lar_de_Idosos.Models.Trabalhador", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
-                        .WithMany()
-                        .HasForeignKey("IdentityUserFK");
-
-                    b.Navigation("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
