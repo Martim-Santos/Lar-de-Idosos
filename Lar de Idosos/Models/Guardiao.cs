@@ -24,6 +24,10 @@ namespace Lar_de_Idosos.Models {
         /// <summary>
         /// nº de telemovel do Guardião
         /// </summary>
+        [Display(Name = "Número de Telefone")]
+        [Required(ErrorMessage = "A {0} é de preenchimento obrigatório.")]
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "Deve escrever {1} dígitos no número {0}.")]
+        [RegularExpression("9[1236][0-9]{7}")]
         public string NumTelemovel { get; set; }
 
 
