@@ -40,11 +40,15 @@ namespace Lar_de_Idosos.Controllers.API {
         [HttpGet]
         [Route("")]
         public ActionResult Index() {
-            var listaG = _context.Trabalhador.ToList();
+            var listaG = _context.Guardiao.ToList();
 
             return Ok(listaG);
         }
 
+        /// <summary>
+        /// devolve a lista de idosos
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("ListaIdoso")]
         public ActionResult ListaIdoso() {
@@ -52,6 +56,10 @@ namespace Lar_de_Idosos.Controllers.API {
             return Ok(lista);
         }
 
+        /// <summary>
+        /// devolve a lista de Guardiões
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("ListaGuardiao")]
         public ActionResult ListaGuardiao() {
@@ -59,11 +67,27 @@ namespace Lar_de_Idosos.Controllers.API {
             return Ok(lista);
         }
 
+        /// <summary>
+        /// devolve a lista de trabalhadores
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("ListaTrabalhador")]
         public ActionResult ListaTrabalhador() {
             var lista = _context.Trabalhador.ToList();
             return Ok(lista);
+        }
+
+        /// <summary>
+        /// devolve a lista de médicos
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("ListaMedico")]
+        public ActionResult ListaMedico() {
+            var lista = _context.Trabalhador.ToList();
+            var listaM = lista.Where(t => t.Medico).ToList();
+            return Ok(listaM);
         }
 
         /// <summary>
@@ -158,8 +182,56 @@ namespace Lar_de_Idosos.Controllers.API {
             }
 
             _context.SaveChanges();
-            return Ok();
+            return Ok("Pedido enviado!");
         }
+
+        /// <summary>
+        /// Registar um utilizador/trabalhador
+        /// </summary>
+        /// <param name="trabalhadorDTO"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("RegistarTrab")]
+        public async Task<ActionResult> RegistarAsync([FromBody] TrabalhadorDTO trabalhadorDTO) {
+            _userManager.FindByEmailAsync(trabalhadorDTO.Email);
+
+            if (await _userManager.FindByEmailAsync(trabalhadorDTO.Email) != null) {
+                return BadRequest("Este utilizador já existe, use um email diferente!");
+            }
+
+            IdentityUser user = new IdentityUser();
+            user.Email = trabalhadorDTO.Email;
+            user.NormalizedEmail = trabalhadorDTO.Email.ToUpper();
+
+            user.UserName = trabalhadorDTO.Email;
+            user.NormalizedUserName = trabalhadorDTO.Email.ToUpper();
+
+            user.EmailConfirmed = true;
+
+            user.PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, trabalhadorDTO.Password);
+
+
+            await _userManager.CreateAsync(user);
+
+
+            Trabalhador trabalhador = new Trabalhador();
+            trabalhador.IdentityUserFK = user.Id;
+            trabalhador.Email = user.Email;
+            trabalhador.Nome = trabalhadorDTO.Nome;
+            trabalhador.NumTelemovel = trabalhadorDTO.NumTelemovel;
+            trabalhador.Idade = "20";
+            trabalhador.Descricao = "teste";
+            trabalhador.Medico = trabalhadorDTO.Medico;
+            trabalhador.Tipo = trabalhadorDTO.Tipo;
+
+            _context.Trabalhador.Add(trabalhador);
+            _context.SaveChanges();
+
+
+            return Ok("Registo feito! Olá " + trabalhador.Nome);
+        }
+
+
 
         /// <summary>
         /// registar um utilizador/Guardião
@@ -190,7 +262,6 @@ namespace Lar_de_Idosos.Controllers.API {
             await _userManager.CreateAsync(user);
 
 
-            // TODO: CRIAR O GUARDIAO COM FK DO IDENTITYUSER -> GUARDIAO.IDENTITYUSERFK = USER.ID
             Guardiao guardiao = new Guardiao();
             guardiao.IdentityUserFK = user.Id;
             guardiao.Email = user.Email;
@@ -201,7 +272,7 @@ namespace Lar_de_Idosos.Controllers.API {
             _context.SaveChanges();
 
 
-            return Ok();
+            return Ok("Registo feito! Olá "+guardiao.Nome);
         }
 
         /// <summary>
@@ -224,16 +295,20 @@ namespace Lar_de_Idosos.Controllers.API {
 
             await _signInManager.SignInAsync(user, false);
 
-            return Ok();
+            return Ok("Bem Vindo "+user.Email);
         }
 
+        /// <summary>
+        /// faz o logout
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("Logout")]
         [Authorize]
         public async Task<ActionResult> Logout() {
 
             await _signInManager.SignOutAsync();
-            return Ok("Olá");
+            return Ok("LogOut com sucesso!");
         }
     }
 }
