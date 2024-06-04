@@ -91,6 +91,17 @@ namespace Lar_de_Idosos.Controllers.API {
         }
 
         /// <summary>
+        /// devolve a lista de consultas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("ListaConsulta")]
+        public ActionResult ListaConsulta() {
+            var lista = _context.Consulta.ToList();
+            return Ok(lista);
+        }
+
+        /// <summary>
         /// Criar um Idoso -> o user envia o pedido para criar um idoso, o estado deste é posto em pendente.
         /// Quando um Trabalhador alterar o estádo do idoso para:
         /// aceite -> o idoso é criado e salvo na bd.
