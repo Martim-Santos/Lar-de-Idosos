@@ -31,7 +31,7 @@
                 <span asp-validation-for="Foto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GuardiaoFK" class="control-label"></label>
+                <label asp-for="GuardiaoFK" class="control-label">Guardião</label>
                 <select asp-for="GuardiaoFK" class ="form-control" asp-items="ViewBag.GuardiaoFK"></select>
             </div>
             <div class="form-group">
@@ -42,7 +42,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar para a lista</a>
 </div>
 
 @section Scripts {

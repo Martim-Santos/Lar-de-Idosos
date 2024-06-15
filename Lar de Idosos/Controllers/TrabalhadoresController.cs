@@ -61,6 +61,8 @@ namespace Lar_de_Idosos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Nome,Idade,Email,NumTelemovel,Descricao,Medico,Tipo")] Trabalhador trabalhador, IFormFile ImagemFoto)
         {
+            //ModelState.Remove("");
+
             if (ModelState.IsValid)
             {
                 string nomeImagem = "";
@@ -68,7 +70,8 @@ namespace Lar_de_Idosos.Controllers
 
                 if (ImagemFoto == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Deve fornecer uma Foto");
+                    ModelState.AddModelError("",
+                        "Deve fornecer uma Foto");
                     return View(trabalhador);
                 }
                 else
@@ -83,7 +86,7 @@ namespace Lar_de_Idosos.Controllers
                         haImagem = true;
                         Guid g = Guid.NewGuid();
                         nomeImagem = g.ToString();
-                        string extensaoImagem = Path.GetExtension(ImagemFoto.ContentType);
+                        string extensaoImagem = Path.GetExtension(ImagemFoto.FileName).ToLowerInvariant();
                         nomeImagem += extensaoImagem;
 
                         trabalhador.Foto = nomeImagem;
@@ -108,7 +111,7 @@ namespace Lar_de_Idosos.Controllers
                         Directory.CreateDirectory(localizacaoImagem);
                     }
 
-                    localizacaoImagem = Path.Combine(localizacaoImagem, "Imagens");
+                    localizacaoImagem = Path.Combine(localizacaoImagem, nomeImagem);
                     // guardar a imagem no disco rigido
                     using var stream = new FileStream(
                         localizacaoImagem, FileMode.Create);

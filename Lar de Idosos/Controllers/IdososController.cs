@@ -120,7 +120,7 @@ namespace Lar_de_Idosos.Controllers
                 // redireciona o utilizador para a página de 'início' dos idosos.
                 return RedirectToAction(nameof(Index));
             };
-            ViewData["GuardiaoFK"] = new SelectList(_context.Guardiao, "Id", "Id", idoso.GuardiaoFK);
+            ViewData["GuardiaoFK"] = new SelectList(_context.Guardiao, "Id", "Nome", idoso.GuardiaoFK);
             return View(idoso);
         }
 
