@@ -41,7 +41,6 @@ namespace Lar_de_Idosos.Controllers.API {
         [Route("")]
         public ActionResult Index() {
             var listaG = _context.Guardiao.ToList();
-
             return Ok(listaG);
         }
 

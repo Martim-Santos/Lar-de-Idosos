@@ -9,14 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // -------------Importante para criar a base de dados----------------
-//define as especifica��es particulares da BD
+//define as especificações particulares da BD
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 //define qual a BD que o projeto vai utilizar
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 // ------------------------------------------------------------------
 
-// ------------Importante para ter acesso �s tabelas da Identity-----
+// ------------Importante para ter acesso às tabelas da Identity-----
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 // ------------------------------------------------------------------
