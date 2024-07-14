@@ -63,13 +63,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Tipo)
             </td>
-            <td>
+                <td>
+                    @*
                 @Html.DisplayFor(modelItem => item.Foto)
-            </td>
+                *@
+                    <img src="~/Imagens/@Html.DisplayFor(modelItem => item.Foto)"
+                         alt="Fodo do Trabalhador @Html.DisplayFor(modelItem => item.Nome)"
+                         title="@Html.DisplayFor(modelItem => item.Nome)"
+                         width="100px" />
+                </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
             </td>
         </tr>
 }

@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
@@ -24,11 +24,14 @@
             </div>
             <div class="form-group">
                 <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" class="form-control" />
+                <input type="file"
+                       name="ImagemFoto"
+                       accept=".png,.jpg,.jpeg"
+                       class="form-control" />
                 <span asp-validation-for="Foto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="GuardiaoFK" class="control-label"></label>
+                <label asp-for="GuardiaoFK" class="control-label">Guardião</label>
                 <select asp-for="GuardiaoFK" class ="form-control" asp-items="ViewBag.GuardiaoFK"></select>
             </div>
             <div class="form-group">
@@ -39,7 +42,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar para a lista</a>
 </div>
 
 @section Scripts {

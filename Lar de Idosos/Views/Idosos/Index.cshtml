@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Lar_de_Idosos.Models.Idoso>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Idosos";
 }
 
-<h1>Index</h1>
+<h1>Idosos</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -36,16 +36,22 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Idade)
             </td>
-            <td>
+                <td>
+                    @*
                 @Html.DisplayFor(modelItem => item.Foto)
+                *@
+                    <img src="~/Imagens/@Html.DisplayFor(modelItem => item.Foto)"
+                         alt="Fodo do Idoso @Html.DisplayFor(modelItem => item.Nome)"
+                         title="@Html.DisplayFor(modelItem => item.Nome)"
+                         width="100px" />
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guardiao.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Guardiao.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Apagar</a>
             </td>
         </tr>
 }

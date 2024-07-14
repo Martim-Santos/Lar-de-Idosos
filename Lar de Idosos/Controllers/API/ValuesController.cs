@@ -41,7 +41,6 @@ namespace Lar_de_Idosos.Controllers.API {
         [Route("")]
         public ActionResult Index() {
             var listaG = _context.Guardiao.ToList();
-
             return Ok(listaG);
         }
 
@@ -88,6 +87,17 @@ namespace Lar_de_Idosos.Controllers.API {
             var lista = _context.Trabalhador.ToList();
             var listaM = lista.Where(t => t.Medico).ToList();
             return Ok(listaM);
+        }
+
+        /// <summary>
+        /// devolve a lista de consultas
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("ListaConsulta")]
+        public ActionResult ListaConsulta() {
+            var lista = _context.Consulta.ToList();
+            return Ok(lista);
         }
 
         /// <summary>

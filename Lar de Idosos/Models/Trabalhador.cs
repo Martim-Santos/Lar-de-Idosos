@@ -36,7 +36,7 @@ namespace Lar_de_Idosos.Models {
         * Construção dos Relacionamentos
         * *************************************** */
 
-        // lista das Consultas 'Pertencentes' a um Idoso
+        // lista das Consultas 'Pertencentes' a um Trabalhador
         public ICollection<Consulta> ListaConsultas { get; set; }
 
         

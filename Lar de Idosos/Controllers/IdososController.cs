@@ -51,7 +51,7 @@ namespace Lar_de_Idosos.Controllers
         // GET: Idosos/Create
         public IActionResult Create()
         {
-            ViewData["GuardiaoFK"] = new SelectList(_context.Guardiao, "Id", "Id");
+            ViewData["GuardiaoFK"] = new SelectList(_context.Guardiao, "Id", "Nome");
             return View();
         }
 
@@ -60,7 +60,7 @@ namespace Lar_de_Idosos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Idade,Foto,GuardiaoFK")] Idoso idoso, IFormFile ImagemFoto)
+        public async Task<IActionResult> Create([Bind("Nome,Idade,GuardiaoFK")] Idoso idoso, IFormFile ImagemFoto)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,8 @@ namespace Lar_de_Idosos.Controllers
 
                 if (ImagemFoto == null)
                 {
-                    ModelState.AddModelError(string.Empty, "Deve fornecer uma Foto");
+                    ModelState.AddModelError("",
+                        "Deve fornecer uma Foto");
                     return View(idoso);
                 }
                 else
@@ -84,7 +85,7 @@ namespace Lar_de_Idosos.Controllers
                         haImagem = true;
                         Guid g = Guid.NewGuid();
                         nomeImagem = g.ToString();
-                        string extensaoImagem = Path.GetExtension(ImagemFoto.ContentType);
+                        string extensaoImagem = Path.GetExtension(ImagemFoto.FileName).ToLowerInvariant();
                         nomeImagem += extensaoImagem;
 
                         idoso.Foto = nomeImagem;
@@ -108,8 +109,7 @@ namespace Lar_de_Idosos.Controllers
                     {
                         Directory.CreateDirectory(localizacaoImagem);
                     }
-
-                    localizacaoImagem = Path.Combine(localizacaoImagem, "Imagens");
+                    localizacaoImagem = Path.Combine(localizacaoImagem, nomeImagem);
                     // guardar a imagem no disco rigido
                     using var stream = new FileStream(
                         localizacaoImagem, FileMode.Create);
@@ -120,7 +120,7 @@ namespace Lar_de_Idosos.Controllers
                 // redireciona o utilizador para a página de 'início' dos idosos.
                 return RedirectToAction(nameof(Index));
             };
-            ViewData["GuardiaoFK"] = new SelectList(_context.Guardiao, "Id", "Id", idoso.GuardiaoFK);
+            ViewData["GuardiaoFK"] = new SelectList(_context.Guardiao, "Id", "Nome", idoso.GuardiaoFK);
             return View(idoso);
         }
 

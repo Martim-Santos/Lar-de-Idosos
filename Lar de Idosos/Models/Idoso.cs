@@ -28,7 +28,7 @@ namespace Lar_de_Idosos.Models {
 
         [ForeignKey(nameof(Guardiao))]
         public int GuardiaoFK { get; set; } // FK para o Guardiao
-        public Guardiao Guardiao { get; set; } // FK para o Guardiao
+        public Guardiao? Guardiao { get; set; } // FK para o Guardiao
 
 
 

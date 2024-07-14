@@ -16,12 +16,12 @@ namespace Lar_de_Idosos.Models {
 
         [ForeignKey(nameof(Idoso))]
         public int IdosoFK { get; set; } // FK para o Idoso
-        public Idoso Idoso { get; set; } // FK para o Idoso
+        public Idoso? Idoso { get; set; } // FK para o Idoso
 
 
         [ForeignKey(nameof(Trabalhador))]
         public int TrabalhadorFK { get; set; } // FK para o Trabalhador
-        public Trabalhador Trabalhador { get; set; } // FK para o Trabalhador
+        public Trabalhador? Trabalhador { get; set; } // FK para o Trabalhador
 
     }
 }

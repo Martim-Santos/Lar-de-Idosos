@@ -49,8 +49,8 @@ namespace Lar_de_Idosos.Controllers
         // GET: Consultas/Create
         public IActionResult Create()
         {
-            ViewData["IdosoFK"] = new SelectList(_context.Idoso, "Id", "Id");
-            ViewData["TrabalhadorFK"] = new SelectList(_context.Trabalhador, "Id", "Id");
+            ViewData["IdosoFK"] = new SelectList(_context.Idoso, "Id", "Nome");
+            ViewData["TrabalhadorFK"] = new SelectList(_context.Trabalhador, "Id", "Nome");
             return View();
         }
 
